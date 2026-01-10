@@ -3,31 +3,45 @@ Some properties like position and size get set by the game
 Feel free to play with things like color or font
 */
 
-html,
 body {
+  overflow: hidden;
   padding: 0;
   margin: 0;
+  border: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
+
 #game {
   margin: 4px;
   border: 5px solid black;
-  left: 0;
-  position: absolute;
-  background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.solidbackgrounds.com%2Fimages%2F3840x2160%2F3840x2160-dark-gray-solid-color-background.jpg&f=1&nofb=1&ipt=877493d70f6e5cd4f5d0c31b0904c3d2ea241d36c4c120748e14eda7e8394829");
+  background-image: url(https://img.freepik.com/premium-photo/cherry-blossom-japanese-lofi-anime-style_1091302-8040.jpg);
   background-size: cover;
+  position: relative;
 }
 
 #left-paddle {
-  background-color: yellow;
-  left: 10px;
-  height: 25px;
+  left: 5px;
+  position: absolute;
+  background-color: rgb(0, 0, 0);
 }
 
 #right-paddle {
-  background-color: black;
-  right: 10px;
- 
-  
+  right: 5px;
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+}
+
+#left-score {
+  left: 270px;
+  position: absolute;
+}
+
+#right-score {
+  right: 270px;
+  position: absolute;
 }
 
 #instructions {
@@ -69,33 +83,21 @@ body {
 }
 
 .paddle {
-  top: 0;
   width: 5px;
-  position: absolute;
 }
 
 .ball {
   width: 15px;
   height: 15px;
-  background-color: yellow;
+  background-color: rgb(231, 13, 13);
   border-radius: 10px;
   position: absolute;
-  left: 50px;
-  top: 50px;
 }
 
 .score {
   display: block;
-  position: absolute;
   font-family: Arial, Helvetica, sans-serif;
   color: red;
   top: 0;
 }
 
-#left-score {
-  left: 1%;
-}
-
-#right-score {
-  right: 1%;
-}

@@ -58,10 +58,27 @@ paddleRight.controller = "player2";
 paddleRight.htmlElement = document.getElementById("right-paddle");
 paddleArray.push(paddleRight);
 paddlesReset();
+var leftScoreDisplay = document.getElementById("left-score");
+var rightScoreDisplay = document.getElementById("right-score");
+
+
 //END OF GAME OBJECTS///
 
 //STARTUP EVENTS
 ambientSound.play();
+
+function randomizeColors() {
+  var randomHue1 = Math.floor(Math.random() * 361);
+  ball.htmlElement.style.backgroundColor = "hsl(" + randomHue1 + ", 100%, 50%)";
+  var randomHue2 = Math.floor(Math.random() * 361);
+  paddleLeft.htmlElement.style.backgroundColor = "hsl(" + randomHue2 + ", 100%, 50%)";
+  var randomHue3 = Math.floor(Math.random() * 361);
+  paddleRight.htmlElement.style.backgroundColor = "hsl(" + randomHue3 + ", 100%, 50%)";
+  var randomHue4 = Math.floor(Math.random() * 361);
+  leftScoreDisplay.style.color = "hsl(" + randomHue4 + ", 100%, 50%)";
+  var randomHue5 = Math.floor(Math.random() * 361);
+  rightScoreDisplay.style.color = "hsl(" + randomHue5 + ", 100%, 50%)";
+}
 
 //RUNNING PROCESSES (updated every frame of the game)
 function gameProcess() {
@@ -85,15 +102,19 @@ function gameProcess() {
   // this is a non-persistant event so it only needs to be checked
   if (ballHitWall.state === true) {
     wallSound.play();
+    randomizeColors();
   }
   if (ballHitPaddle.state) {
     paddleSound.play();
+    randomizeColors();
   }
   if (leftScoreHit.state) {
     scoreSound.play();
+    randomizeColors();
   }
   if (rightScoreHit.state) {
     scoreSound.play();
+    randomizeColors();
   }
   //this is a persistant event so it must be checked and checked if it changed
   if (rightScoreHigher.state && rightScoreHigher.changed) {
@@ -131,8 +152,6 @@ var gameDebug = document.getElementById("debug"); //update debug text
 //gameDebug.innerHTML = "XXXX";
 
 //Score Display
-var leftScoreDisplay = document.getElementById("left-score");
-var rightScoreDisplay = document.getElementById("right-score");
 var leftScore = 0;
 var rightScore = 0;
 
@@ -331,6 +350,7 @@ function controlUpdate() {
     //Toggle Computer Control
     //1
     if (value === 49 && computerPlayer.changedManual === false) {
+      console.log("Computer control enabled");
       game.computerState =
         (game.computerState + 1) % game.computerDifficulty.length;
       computerPlayer.changedManual = true; //computer player state is changed
@@ -340,6 +360,7 @@ function controlUpdate() {
     //Toggle Mouse Control
     //2
     if (value === 50 && mouseControl.changedManual === false) {
+      console.log("Mouse control enabled");
       mouseControl.state = !mouseControl.state; // toggle computer player state
       mouseControl.changedManual = true; //computer player state is changed
       mouseControl.htmlElement.innerHTML = boolToOnOff(mouseControl.state);
@@ -368,6 +389,7 @@ function controlUpdate() {
     //Reset Score, Ball Position, and Paddle Positions
     //R
     if (value === 82 && resetScoreAndBall === false) {
+      console.log("Reset");
       resetScoreAndBall = true; //computer player state is changed
       leftScore = 0;
       rightScore = 0;
